@@ -89,7 +89,8 @@ func (aas *CombinerAlertAnalyzerService) Start() error {
 				log.Error("error marshaling response", err)
 				continue
 			}
-			log.Debugf(resStr)
+
+			log.WithField("result", "combination").Debugf(resStr)
 
 			rt := &clients.AgentRoundTrip{
 				AgentConfig:             result.AgentConfig,

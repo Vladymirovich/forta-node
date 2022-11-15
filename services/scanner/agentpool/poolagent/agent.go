@@ -404,9 +404,12 @@ func (agent *Agent) processCombinationAlerts() {
 
 	agent.initWait.Wait()
 
+	lg.Debug("initialized")
+
 	for request := range agent.combinationRequests {
 		startTime := time.Now()
 		if agent.IsClosed() {
+			lg.WithField("duration", time.Since(startTime)).Debugf("ignored due to closed agent")
 			return
 		}
 
